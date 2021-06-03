@@ -5,6 +5,7 @@ COPY . /flaskapp
 WORKDIR  /flaskapp
 
 RUN pip3 install -r requirement.txt
+RUN pytest test_apps.py
 
 EXPOSE 5000
 

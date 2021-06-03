@@ -19,9 +19,13 @@ def ack(param):
 @app.route('/postme', methods=['POST'])
 def sample_post():
 
-    if not request.is_json or not request.data:
+    if not request.is_json:
         return make_response(jsonify({"message": "Invalid Request"}), 404)
+
     data = json.loads(request.data, strict=False)
+    if not data:
+        return make_response(jsonify({"message": "No Payload"}), 404)
+
     if not data.get('foo'):
         return make_response(jsonify({"message": "'foo' key is missing"}), 404)
 
