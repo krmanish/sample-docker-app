@@ -12,12 +12,19 @@ Dockerize a sample Flask app that can be accessed from outside container.
 * ```git clone https://github.com/krmanish/sample-docker-app```
 * ```cd sample-docker-app```
 * ```python3 apps.py```  # Verify if server running fine at http://0.0.0.0:5000. Kill this if all is well
-* Next Build container: ```
+* Next Build container / Create Image: ```
     sudo docker build --tag sample-flask-app . ```
  
-* Finally run the container: ```sh sudo docker run --name sample-flask-app -p 5000 --expose 5000 sample-flask-app```
+* Finally create container & Run: ```sudo docker run --name sample-flask-app -p 5000 --expose 5000 sample-flask-app```
 
 That's it, if all goes well, you should be able to see a server running at http://172.17.0.2:5000 or something similar ip.
+
+## Test Cases & Coverage
+* Run testcase using coverage command
+	``` coverage run -m pytest test_apps.py ```
+
+* Check out the testcase coverage
+	``` coverage report test_apps.py ```
 
 
 ## Test container app using CURL
@@ -26,8 +33,11 @@ That's it, if all goes well, you should be able to see a server running at http:
 * ```curl -X POST http://<container ip address>:5000/postme -d '{"foo": "wah", "bar": 12}' -H 'content-type: application/json'```
 
 ### Other Useful Docker commands
+* Show list of images: ```sudo docker images```
+* Remove image: ```sudo docker image rm <image_name>```
+* Show Running container: ```sudo docker ps```
 * Remove Container: ``` sudo docker rm sample-flask-app [or use container id]```
-* Kill running container: ```sudo docker kill sample-flask-app ```
+* Kill running container: ```sudo docker kill sample-flask-app [-f]```
  
 
 
